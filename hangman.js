@@ -1,11 +1,11 @@
-const Hangman = function (word, remainingGuesses) {
+class Hangman {
+    constructor(word, remainingGuesses) {
     this.word = word.toLowerCase().split('')
     this.remainingGuesses = remainingGuesses
     this.guessedLetters = []
     this.status = 'playing'
 }
-
-Hangman.prototype.calculateStatus = function () {
+calculateStatus() {
     const finished = this.word.every((letter) => this.guessedLetters.includes(letter))
 
     if (this.remainingGuesses === 0) {
@@ -16,18 +16,16 @@ Hangman.prototype.calculateStatus = function () {
         this.status = 'playing'
     }
 }
-
-Hangman.prototype.getStatusMessage = function () {
+getStatusMessage() {
     if (this.status === 'playing') {
         return `Guesses left: ${this.remainingGuesses}`
     } else if (this.status === 'failed') {
         return `Nice try! The word was "${this.word.join('')}".`
     } else {
-        return 'Great work! You guessed the work.'
+        return 'Great work! You guessed the word.'
     }
 }
-
-Hangman.prototype.getPuzzle = function () {
+getPuzzle() {
     let puzzle = ''
 
     this.word.forEach((letter) => {
@@ -40,8 +38,7 @@ Hangman.prototype.getPuzzle = function () {
 
     return puzzle
 }
-
-Hangman.prototype.makeGuess = function (guess) {
+makeGuess (guess) {
     guess = guess.toLowerCase()
     const isUnique = !this.guessedLetters.includes(guess)
     const isBadGuess = !this.word.includes(guess)
@@ -60,4 +57,12 @@ Hangman.prototype.makeGuess = function (guess) {
 
     this.calculateStatus()
 }
+}
+
+
+
+
+
+
+
 
